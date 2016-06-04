@@ -8,20 +8,32 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.rafael.popularmovies.Movie;
 import com.rafael.popularmovies.R;
+
+import java.util.List;
+
+import static java.lang.String.valueOf;
+import static java.util.Arrays.asList;
 
 public class MoviePosterAdapter extends BaseAdapter {
 
     private Context context;
 
-    private Integer[] sampleThumbnails = {
-            R.drawable.sample_0, R.drawable.sample_1,
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-            R.drawable.sample_1, R.drawable.sample_2,
-            R.drawable.sample_3, R.drawable.sample_4
-    };
+    private List<Movie> sampleThumbnails = asList(
+            new Movie(valueOf(R.drawable.sample_0), null, null, null),
+            new Movie(valueOf(R.drawable.sample_1), null, null, null),
+            new Movie(valueOf(R.drawable.sample_2), null, null, null),
+            new Movie(valueOf(R.drawable.sample_3), null, null, null),
+            new Movie(valueOf(R.drawable.sample_4), null, null, null),
+            new Movie(valueOf(R.drawable.sample_5), null, null, null),
+            new Movie(valueOf(R.drawable.sample_6), null, null, null),
+            new Movie(valueOf(R.drawable.sample_7), null, null, null),
+            new Movie(valueOf(R.drawable.sample_0), null, null, null),
+            new Movie(valueOf(R.drawable.sample_1), null, null, null),
+            new Movie(valueOf(R.drawable.sample_2), null, null, null),
+            new Movie(valueOf(R.drawable.sample_3), null, null, null)
+    );
 
     public MoviePosterAdapter(Context context) {
         this.context = context;
@@ -29,7 +41,7 @@ public class MoviePosterAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return sampleThumbnails.length;
+        return sampleThumbnails.size();
     }
 
     @Override
@@ -45,8 +57,12 @@ public class MoviePosterAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View currentView, ViewGroup viewGroupParent) {
         ImageView imageView = buildViewToDisplay(currentView);
-        imageView.setImageResource(sampleThumbnails[position]);
+        imageView.setImageResource(getImageFromResource(position));
         return imageView;
+    }
+
+    private int getImageFromResource(int position) {
+        return Integer.valueOf(sampleThumbnails.get(position).getImageResource());
     }
 
     @NonNull

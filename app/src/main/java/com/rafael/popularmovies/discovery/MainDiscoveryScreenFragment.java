@@ -17,6 +17,8 @@ import com.rafael.popularmovies.detail.DetailActivity;
  */
 public class MainDiscoveryScreenFragment extends Fragment {
 
+    private MoviePosterAdapter moviePosterAdapter;
+
     public MainDiscoveryScreenFragment() {
     }
 
@@ -26,7 +28,9 @@ public class MainDiscoveryScreenFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main_discovery_screen, container, false);
 
         GridView gridView = (GridView)rootView.findViewById(R.id.gridView);
-        gridView.setAdapter(new MoviePosterAdapter(getActivity().getApplicationContext()));
+
+        this.moviePosterAdapter = new MoviePosterAdapter(getActivity().getApplicationContext());
+        gridView.setAdapter(this.moviePosterAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long adapterItemPosition) {
