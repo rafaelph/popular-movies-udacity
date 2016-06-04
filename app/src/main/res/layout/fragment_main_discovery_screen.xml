@@ -9,9 +9,17 @@
     tools:context="com.rafael.popularmovies.MainDiscoveryScreenFragment"
     tools:showIn="@layout/activity_main_discovery_screen">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <GridView
+        android:id="@+id/gridView"
+        android:numColumns="2"
+        android:columnWidth="90dp"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="3dp"
+        android:horizontalSpacing="3dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </GridView>
 
 </RelativeLayout>
