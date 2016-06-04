@@ -46,8 +46,8 @@ public class MoviePosterAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
+    public Object getItem(int position) {
+        return sampleThumbnails.get(position);
     }
 
     @Override

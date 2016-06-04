@@ -1,8 +1,9 @@
 package com.rafael.popularmovies.discovery;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.widget.GridView;
 
 import com.rafael.popularmovies.R;
 import com.rafael.popularmovies.detail.DetailActivity;
+
+import static com.rafael.popularmovies.Movie.MOVIE_EXTRA;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -35,6 +38,7 @@ public class MainDiscoveryScreenFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long adapterItemPosition) {
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra(MOVIE_EXTRA, (Parcelable) moviePosterAdapter.getItem(position));
                 startActivity(intent);
             }
         });

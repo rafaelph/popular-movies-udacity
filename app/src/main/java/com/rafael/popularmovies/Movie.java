@@ -1,6 +1,11 @@
 package com.rafael.popularmovies;
 
-public class Movie {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Movie implements Parcelable {
+
+    public static final String MOVIE_EXTRA = "movie";
 
     private final String imageResource;
     private final String rating;
@@ -13,6 +18,38 @@ public class Movie {
         this.releaseDate = releaseDate;
         this.description = description;
     }
+
+    protected Movie(Parcel in) {
+        imageResource = in.readString();
+        rating = in.readString();
+        releaseDate = in.readString();
+        description = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(imageResource);
+        dest.writeString(rating);
+        dest.writeString(releaseDate);
+        dest.writeString(description);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 
     public String getImageResource() {
         return imageResource;
