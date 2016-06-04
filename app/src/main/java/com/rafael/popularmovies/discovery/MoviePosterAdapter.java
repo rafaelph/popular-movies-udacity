@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.rafael.popularmovies.Movie;
 import com.rafael.popularmovies.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -57,7 +58,7 @@ public class MoviePosterAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View currentView, ViewGroup viewGroupParent) {
         ImageView imageView = buildViewToDisplay(currentView);
-        imageView.setImageResource(getImageFromResource(position));
+        Picasso.with(this.context).load(getImageFromResource(position)).into(imageView);
         return imageView;
     }
 
