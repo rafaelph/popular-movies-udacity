@@ -1,10 +1,12 @@
-package com.rafael.popularmovies;
+package com.rafael.popularmovies.discovery;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.rafael.popularmovies.R;
 
 public class MainDiscoveryScreen extends AppCompatActivity {
 

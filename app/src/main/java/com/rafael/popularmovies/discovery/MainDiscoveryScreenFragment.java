@@ -1,4 +1,4 @@
-package com.rafael.popularmovies;
+package com.rafael.popularmovies.discovery;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+
+import com.rafael.popularmovies.R;
 
 /**
  * A placeholder fragment containing a simple view.

@@ -1,4 +1,4 @@
-package com.rafael.popularmovies;
+package com.rafael.popularmovies.discovery;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+
+import com.rafael.popularmovies.R;
 
 public class MoviePosterAdapter extends BaseAdapter {
 
