@@ -7,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".discovery.MainDiscoveryScreenFragment"
-    tools:showIn="@layout/activity_main_discovery_screen">
+    tools:showIn="@layout/content_main_discovery_screen">
 
     <GridView
         android:id="@+id/gridView"
