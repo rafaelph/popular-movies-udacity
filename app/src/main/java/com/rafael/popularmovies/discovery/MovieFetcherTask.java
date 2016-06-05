@@ -19,7 +19,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieFetcherTask extends AsyncTask<String, Void, List<Movie>>{
+public class MovieFetcherTask extends AsyncTask<String, Void, List<Movie>> {
 
     private static final String TAG = MovieFetcherTask.class.getSimpleName();
     private static final String API_KEY = BuildConfig.TMDB_API_KEY;
@@ -37,54 +37,70 @@ public class MovieFetcherTask extends AsyncTask<String, Void, List<Movie>>{
     }
 
     @Override
-    protected void onPostExecute(List<Movie> s) {
-        this.moviePosterAdapter.add(s);
-        super.onPostExecute(s);
+    protected void onPostExecute(List<Movie> movies) {
+        this.moviePosterAdapter.add(movies);
+        super.onPostExecute(movies);
     }
 
     @Nullable
     private List<Movie> fetchMovieSummaries(String uri) {
         List<Movie> movies = new ArrayList<>();
-        HttpURLConnection urlConnection = null;
-        StringBuilder buffer;
         try {
-            //Fetch Data
+            movies = new MovieJsonParser(fetchMoviesAsJsonString(uri)).getMovies();
+        } catch (JSONException e) {
+            Log.e(TAG, "Invalid JSON", e);
+        }
+
+        return movies;
+    }
+
+    private String fetchMoviesAsJsonString(String uri) {
+        String jsonString = "";
+        HttpURLConnection urlConnection = null;
+        try {
             URL url = new URL(uri);
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
-            //Parse data
-            InputStream inputStream = urlConnection.getInputStream();
-            buffer = new StringBuilder();
-            if (inputStream == null) {
-                return null;
-            }
+            jsonString = getResultFromConnection(urlConnection);
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line);
-            }
-
-            if (buffer.length() == 0) {
-                return null;
-            }
-
-            movies = new MovieJsonParser(buffer.toString()).getMovies();
-
-            reader.close();
-        } catch (IOException | JSONException e) {
-            Log.e(TAG, "Error", e);
+        } catch (IOException e) {
+            Log.e(TAG, "IOException", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
             }
         }
-        for (Movie movie: movies) {
-            Log.i(TAG, movie.getMovieTitle());
-        }
+        return jsonString;
+    }
 
-        return movies;
+
+    private String getResultFromConnection(HttpURLConnection urlConnection) throws IOException {
+        String result = "";
+        BufferedReader reader = null;
+        try {
+            InputStream inputStream = urlConnection.getInputStream();
+            StringBuilder stringBuilder = new StringBuilder();
+
+            reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+
+            if (stringBuilder.length() == 0) {
+                return "";
+            }
+            result = stringBuilder.toString();
+
+        } catch (NullPointerException e) {
+            Log.e(TAG, "GetResultFromConnection", e);
+        } finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
+        return result;
     }
 }

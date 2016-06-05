@@ -43,13 +43,13 @@ public class MainDiscoveryScreenFragment extends Fragment {
             }
         });
 
-        fetchMovieSummaries();
+        fetchMovieSummaries(this.moviePosterAdapter);
 
         return rootView;
     }
 
-    private void fetchMovieSummaries() {
-        MovieFetcherTask fetcherTask = new MovieFetcherTask(this.moviePosterAdapter);
+    private void fetchMovieSummaries(MoviePosterAdapter adapter) {
+        MovieFetcherTask fetcherTask = new MovieFetcherTask(adapter);
         fetcherTask.execute("");
     }
 }

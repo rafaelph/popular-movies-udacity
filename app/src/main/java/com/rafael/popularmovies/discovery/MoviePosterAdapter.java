@@ -70,9 +70,8 @@ public class MoviePosterAdapter extends BaseAdapter {
     @NonNull
     private ImageView buildViewFromScratch() {
         ImageView imageView = new ImageView(this.context);
-        imageView.setLayoutParams(new GridView.LayoutParams(480, 480));
+        imageView.setLayoutParams(new GridView.LayoutParams(540, 700));
         imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        imageView.setPadding(8, 8, 8, 8);
         return imageView;
     }
 
