@@ -49,7 +49,7 @@ public class MainDiscoveryScreenFragment extends Fragment {
     }
 
     private void fetchMovieSummaries() {
-        MovieFetcherTask fetcherTask = new MovieFetcherTask();
+        MovieFetcherTask fetcherTask = new MovieFetcherTask(this.moviePosterAdapter);
         fetcherTask.execute("");
     }
 }

@@ -9,32 +9,16 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.rafael.popularmovies.Movie;
-import com.rafael.popularmovies.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.String.valueOf;
-import static java.util.Arrays.asList;
 
 public class MoviePosterAdapter extends BaseAdapter {
 
     private Context context;
 
-    private List<Movie> sampleThumbnails = asList(
-            new Movie(null, valueOf(R.drawable.sample_0), null, null, null),
-            new Movie(null, valueOf(R.drawable.sample_1), null, null, null),
-            new Movie(null, valueOf(R.drawable.sample_2), null, null, null),
-            new Movie(null, valueOf(R.drawable.sample_3), null, null, null),
-            new Movie(null, valueOf(R.drawable.sample_4), null, null, null),
-            new Movie(null, valueOf(R.drawable.sample_5), null, null, null),
-            new Movie(null, valueOf(R.drawable.sample_6), null, null, null),
-            new Movie(null, valueOf(R.drawable.sample_7), null, null, null),
-            new Movie(null, valueOf(R.drawable.sample_0), null, null, null),
-            new Movie(null, valueOf(R.drawable.sample_1), null, null, null),
-            new Movie(null, valueOf(R.drawable.sample_2), null, null, null),
-            new Movie(null, valueOf(R.drawable.sample_3), null, null, null)
-    );
+    private List<Movie> movies = new ArrayList<>();
 
     public MoviePosterAdapter(Context context) {
         this.context = context;
@@ -42,12 +26,12 @@ public class MoviePosterAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return sampleThumbnails.size();
+        return movies.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return sampleThumbnails.get(position);
+        return movies.get(position);
     }
 
     @Override
@@ -58,12 +42,18 @@ public class MoviePosterAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View currentView, ViewGroup viewGroupParent) {
         ImageView imageView = buildViewToDisplay(currentView);
-        Picasso.with(this.context).load(getImageFromResource(position)).into(imageView);
+        Picasso.with(this.context).load(getImageFromResource(position)).fit().into(imageView);
         return imageView;
     }
 
-    private int getImageFromResource(int position) {
-        return Integer.valueOf(sampleThumbnails.get(position).getImageResource());
+    public void add(List<Movie> s) {
+        this.movies.clear();
+        this.movies.addAll(s);
+        this.notifyDataSetChanged();
+    }
+
+    private String getImageFromResource(int position) {
+        return movies.get(position).getImageResource();
     }
 
     @NonNull
@@ -81,7 +71,7 @@ public class MoviePosterAdapter extends BaseAdapter {
     private ImageView buildViewFromScratch() {
         ImageView imageView = new ImageView(this.context);
         imageView.setLayoutParams(new GridView.LayoutParams(480, 480));
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         imageView.setPadding(8, 8, 8, 8);
         return imageView;
     }

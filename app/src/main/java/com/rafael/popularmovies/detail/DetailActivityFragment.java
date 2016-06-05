@@ -1,18 +1,18 @@
 package com.rafael.popularmovies.detail;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.rafael.popularmovies.Movie;
 import com.rafael.popularmovies.R;
 import com.squareup.picasso.Picasso;
 
 import static com.rafael.popularmovies.Movie.MOVIE_EXTRA;
-import static java.lang.Integer.valueOf;
 
 public class DetailActivityFragment extends Fragment {
 
@@ -29,7 +29,11 @@ public class DetailActivityFragment extends Fragment {
         Bundle extrasFromIntent = getActivity().getIntent().getExtras();
         if (extrasFromIntent != null) {
             Movie movie = getMovieFromParcelable(extrasFromIntent);
-            Picasso.with(getActivity()).load(valueOf(movie.getImageResource())).into(movieThumbnail);
+            TextView movieTitle = (TextView) rootView.findViewById(R.id.movieTitleTextView);
+            TextView description = (TextView) rootView.findViewById(R.id.synopsisText);
+            movieTitle.setText(movie.getMovieTitle());
+            description.setText(movie.getDescription());
+            Picasso.with(getActivity()).load(movie.getImageResource()).into(movieThumbnail);
         } else {
             Picasso.with(getActivity()).load(R.mipmap.ic_launcher).into(movieThumbnail);
         }
