@@ -22,18 +22,18 @@ public class MoviePosterAdapter extends BaseAdapter {
     private Context context;
 
     private List<Movie> sampleThumbnails = asList(
-            new Movie(valueOf(R.drawable.sample_0), null, null, null),
-            new Movie(valueOf(R.drawable.sample_1), null, null, null),
-            new Movie(valueOf(R.drawable.sample_2), null, null, null),
-            new Movie(valueOf(R.drawable.sample_3), null, null, null),
-            new Movie(valueOf(R.drawable.sample_4), null, null, null),
-            new Movie(valueOf(R.drawable.sample_5), null, null, null),
-            new Movie(valueOf(R.drawable.sample_6), null, null, null),
-            new Movie(valueOf(R.drawable.sample_7), null, null, null),
-            new Movie(valueOf(R.drawable.sample_0), null, null, null),
-            new Movie(valueOf(R.drawable.sample_1), null, null, null),
-            new Movie(valueOf(R.drawable.sample_2), null, null, null),
-            new Movie(valueOf(R.drawable.sample_3), null, null, null)
+            new Movie(null, valueOf(R.drawable.sample_0), null, null, null),
+            new Movie(null, valueOf(R.drawable.sample_1), null, null, null),
+            new Movie(null, valueOf(R.drawable.sample_2), null, null, null),
+            new Movie(null, valueOf(R.drawable.sample_3), null, null, null),
+            new Movie(null, valueOf(R.drawable.sample_4), null, null, null),
+            new Movie(null, valueOf(R.drawable.sample_5), null, null, null),
+            new Movie(null, valueOf(R.drawable.sample_6), null, null, null),
+            new Movie(null, valueOf(R.drawable.sample_7), null, null, null),
+            new Movie(null, valueOf(R.drawable.sample_0), null, null, null),
+            new Movie(null, valueOf(R.drawable.sample_1), null, null, null),
+            new Movie(null, valueOf(R.drawable.sample_2), null, null, null),
+            new Movie(null, valueOf(R.drawable.sample_3), null, null, null)
     );
 
     public MoviePosterAdapter(Context context) {

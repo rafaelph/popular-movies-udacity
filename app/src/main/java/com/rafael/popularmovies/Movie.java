@@ -11,15 +11,18 @@ public class Movie implements Parcelable {
     private final String rating;
     private final String releaseDate;
     private final String description;
+    private final String movieTitle;
 
-    public Movie (String imageResource, String rating, String releaseDate, String description) {
+    public Movie (String movieTitle, String imageResource, String rating, String releaseDate, String description) {
         this.imageResource = imageResource;
         this.rating = rating;
         this.releaseDate = releaseDate;
         this.description = description;
+        this.movieTitle = movieTitle;
     }
 
     protected Movie(Parcel in) {
+        movieTitle = in.readString();
         imageResource = in.readString();
         rating = in.readString();
         releaseDate = in.readString();
@@ -28,6 +31,7 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(movieTitle);
         dest.writeString(imageResource);
         dest.writeString(rating);
         dest.writeString(releaseDate);
@@ -65,5 +69,9 @@ public class Movie implements Parcelable {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getMovieTitle() {
+        return movieTitle;
     }
 }
