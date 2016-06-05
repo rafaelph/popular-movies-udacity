@@ -42,6 +42,14 @@ public class MainDiscoveryScreenFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        fetchMovieSummaries();
+
         return rootView;
+    }
+
+    private void fetchMovieSummaries() {
+        MovieFetcherTask fetcherTask = new MovieFetcherTask();
+        fetcherTask.execute("");
     }
 }
