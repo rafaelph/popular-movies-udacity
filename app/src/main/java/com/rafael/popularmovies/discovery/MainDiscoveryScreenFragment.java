@@ -1,8 +1,10 @@
 package com.rafael.popularmovies.discovery;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.rafael.popularmovies.BuildConfig;
 import com.rafael.popularmovies.R;
 import com.rafael.popularmovies.detail.DetailActivity;
 
@@ -43,13 +46,17 @@ public class MainDiscoveryScreenFragment extends Fragment {
             }
         });
 
-        fetchMovieSummaries(this.moviePosterAdapter);
+        MovieFetcherTask fetcherTask = new MovieFetcherTask(this.moviePosterAdapter);
+        fetcherTask.execute(buildMovieUri());
 
         return rootView;
     }
 
-    private void fetchMovieSummaries(MoviePosterAdapter adapter) {
-        MovieFetcherTask fetcherTask = new MovieFetcherTask(adapter);
-        fetcherTask.execute("");
+    @NonNull
+    private String buildMovieUri() {
+        Uri.Builder builder = new Uri.Builder();
+        builder.encodedPath("https://api.themoviedb.org/3/movie/popular");
+        builder.appendQueryParameter("api_key", BuildConfig.TMDB_API_KEY);
+        return builder.build().toString();
     }
 }

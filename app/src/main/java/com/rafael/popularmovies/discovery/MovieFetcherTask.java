@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.rafael.popularmovies.BuildConfig;
 import com.rafael.popularmovies.Movie;
 import com.rafael.popularmovies.MovieJsonParser;
 
@@ -22,7 +21,6 @@ import java.util.List;
 public class MovieFetcherTask extends AsyncTask<String, Void, List<Movie>> {
 
     private static final String TAG = MovieFetcherTask.class.getSimpleName();
-    private static final String API_KEY = BuildConfig.TMDB_API_KEY;
 
     private MoviePosterAdapter moviePosterAdapter;
 
@@ -32,8 +30,12 @@ public class MovieFetcherTask extends AsyncTask<String, Void, List<Movie>> {
 
     @Override
     protected List<Movie> doInBackground(String... strings) {
-        String uri = "https://api.themoviedb.org/3/movie/popular?api_key=" + API_KEY;
-        return fetchMovieSummaries(uri);
+        if (strings != null) {
+            String uri = strings[0];
+            return fetchMovieSummaries(uri);
+        } else {
+            return null;
+        }
     }
 
     @Override
