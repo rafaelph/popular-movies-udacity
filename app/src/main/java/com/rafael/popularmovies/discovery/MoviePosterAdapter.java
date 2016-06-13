@@ -30,7 +30,7 @@ public class MoviePosterAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Movie getItem(int position) {
         return movies.get(position);
     }
 

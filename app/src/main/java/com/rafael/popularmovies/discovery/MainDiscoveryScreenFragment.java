@@ -49,7 +49,7 @@ public class MainDiscoveryScreenFragment extends Fragment implements SharedPrefe
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long adapterItemPosition) {
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
-                intent.putExtra(MOVIE_EXTRA, (Parcelable) moviePosterAdapter.getItem(position));
+                intent.putExtra(MOVIE_EXTRA, moviePosterAdapter.getItem(position));
                 startActivity(intent);
             }
         });
